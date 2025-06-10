@@ -1,14 +1,21 @@
 package org.scoula.config;
 
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
 
 /**
  * 🚀 웹 애플리케이션 부트스트래핑 설정 클래스
  * - Spring MVC 웹 애플리케이션의 진입점 역할을 하는 클래스
  * - web.xml(배포 서술자)을 대체하여 서블릿 컨테이너 초기화와 Spring 컨텍스트 설정을 담당
  */
+
+@Log4j2
+@Configuration
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     /**
@@ -111,5 +118,29 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         characterEncodingFilter.setForceEncoding(true);     // 응답 데이터도 UTF-8 강제 인코딩
 
         return new Filter[] { characterEncodingFilter };
+    }
+
+
+    // 📍 파일 업로드 설정 상수
+    final String LOCATION = "c:/upload";
+    final long MAX_FILE_SIZE = 1024 * 1024 * 10L;      // 10MB
+    final long MAX_REQUEST_SIZE = 1024 * 1024 * 20L;   // 20MB
+    final int FILE_SIZE_THRESHOLD = 1024 * 1024 * 5;   // 5MB
+
+    // 기존 메서드들...
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        // 📍 404 에러를 Exception으로 변환
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+
+        // 📍 Multipart 파일 업로드 설정
+        MultipartConfigElement multipartConfig = new MultipartConfigElement(
+                LOCATION,           // 업로드 처리 디렉토리 경로
+                MAX_FILE_SIZE,      // 업로드 가능한 파일 하나의 최대 크기
+                MAX_REQUEST_SIZE,   // 업로드 가능한 전체 최대 크기(여러 파일 업로드)
+                FILE_SIZE_THRESHOLD // 메모리 파일의 최대 크기(임계값)
+        );
+        registration.setMultipartConfig(multipartConfig);
     }
 }
