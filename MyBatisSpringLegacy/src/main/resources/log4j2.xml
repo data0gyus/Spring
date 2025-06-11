@@ -60,7 +60,6 @@
         - Logger : 특정 패키지나 클래스에 대한 로깅 규칙을 정의
         계층적 구조를 가지며, 상위 Logger의 설정을 상속받을 수 있음
     -->
-    <!-- 로거 설정 -->
     <Loggers>
 
         <!--
@@ -69,7 +68,6 @@
             - 다른 Logger에서 명시적으로 처리되지 않은 모든 로그를 처리
             - 반드시 하나만 존재해야 함
         -->
-        <!-- 최상위 부모 로거(INFO) -->
         <Root level="INFO">
             <AppenderRef ref="console"/>
         </Root>
@@ -81,7 +79,6 @@
             - level="INFO": 애플리케이션 주요 동작 정보를 출력
             - additivity="false": 상위 Logger(Root)로 로그 전파 방지 (중복 출력 방지)
         -->
-        <!-- 애플리케이션 전용 로거 -->
         <Logger name="org.scoula" level="INFO" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
@@ -94,17 +91,13 @@
             - level="INFO": Spring의 주요 동작 정보만 출력
             - additivity="false": Root Logger로의 전파 방지
          -->
-        <!-- 스프링 프레임워크 로거 -->
         <Logger name="org.springframework" level="INFO" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
 
-        <!-- JDBC 관련 로거: 대부분 WARN 레벨로 제한 -->
         <Logger name="jdbc" level="WARN" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>
-
-        <!-- SQL만 INFO 레벨로 출력 (핵심 로그) -->
         <Logger name="jdbc.sqlonly" level="INFO" additivity="false">
             <AppenderRef ref="console"/>
         </Logger>

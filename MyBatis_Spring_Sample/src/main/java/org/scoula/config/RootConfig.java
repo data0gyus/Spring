@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource({"classpath:/application.properties"})
-@MapperScan(basePackages = {"org.scoula.mapper"}) // Mapper 인터페이스 스캔 설정
+// @MapperScan(basePackages = {}) // 주석 처리: 실제 사용 시 활성화  // Mapper 인터페이스 스캔 설정
 public class RootConfig {
 
     // 현재는 기본 설정만 있는 상태
