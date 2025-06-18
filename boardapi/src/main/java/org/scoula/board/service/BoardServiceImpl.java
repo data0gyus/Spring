@@ -75,6 +75,7 @@ public class BoardServiceImpl implements BoardService {
     public BoardDTO update(BoardDTO board) {
         log.info("update......" + board);
 
+        boardMapper.update(board.toVo());  // 게시글 수정 수행
         int affectedRows = boardMapper.update(board.toVo());  // 영향받은 행 수 반환
 //        return affectedRows == 1;                        // 1개 행이 수정되면 성공
         return get(board.getNo());
@@ -84,11 +85,18 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDTO delete(Long no) {
         log.info("delete...." + no);
+
+        // 삭제 전에 게시글 정보를 미리 조회
         BoardDTO board = get(no);
+
+        // 실제 삭제 수행
+        boardMapper.delete(no);
 
         int affectedRows = boardMapper.delete(no);     // 삭제된 행 수 반환
 //        return affectedRows == 1;                 // 1개 행이 삭제되면 성공
+        // 삭제된 게시글 정보를 반환
         return board;
+
     }
 
 
