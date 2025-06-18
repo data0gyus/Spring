@@ -110,9 +110,8 @@ dependencies {
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
 
 
-    // Swagger 관련 의존성
-    implementation 'io.springfox:springfox-swagger2:2.9.2'       // Swagger 핵심 라이브러리
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'     // Swagger UI 웹 인터페이스
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
 
     implementation 'org.apache.httpcomponents:httpcore:4.4.15'

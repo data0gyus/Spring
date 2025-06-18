@@ -13,11 +13,9 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {
-        "org.scoula.weather.controller",    // weather.controller 패키지 추가
         "org.scoula.board.controller",    // BoardController 패키지 추가
         "org.scoula.exception",    // 📍 예외 처리 패키지 추가, 우선 스캔되도록 앞에 작성
-        "org.scoula.controller"    // Spring MVC용 컴포넌트 등록을 위한 스캔 패키지
-})
+        "org.scoula.controller"})    // Spring MVC용 컴포넌트 등록을 위한 스캔 패키지
 public class ServletConfig implements WebMvcConfigurer {
 
     @Override
@@ -29,16 +27,12 @@ public class ServletConfig implements WebMvcConfigurer {
         // Swagger UI 리소스를 위한 핸들러 설정
         registry.addResourceHandler("/swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
-
-        // Swagger WebJar 리소스 설정 (Bootstrap, jQuery 등)
+        // Swagger WebJar 리소스 설정
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-        // Swagger 메타데이터 리소스 설정
+        // Swagger 리소스 설정
         registry.addResourceHandler("/swagger-resources/**")
                 .addResourceLocations("classpath:/META-INF/resources/");
-
-        // API 문서 JSON 엔드포인트 설정
         registry.addResourceHandler("/v2/api-docs")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }

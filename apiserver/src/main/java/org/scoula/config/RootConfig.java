@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -23,7 +22,6 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {
         "org.scoula.board.service" // BoardService 패키지 추
 })    // Service 스캔
-@EnableTransactionManagement // Spring의 어노테이션 기반 트랜잭션(@Transactional) 기능을 활성화하는 어노테이션
 public class RootConfig {
     @Value("${jdbc.driver}") String driver;
     @Value("${jdbc.url}") String url;
